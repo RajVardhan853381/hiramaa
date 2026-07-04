@@ -107,23 +107,42 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-slate-500 text-sm">
-            © {new Date().getFullYear()} All rights reserved by HIRA MAA group.
-          </p>
-          <div className="flex items-center gap-4 text-sm text-slate-500">
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
-          </div>
-            <a
-    href="https://www.invadyatechnologies.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="hover:text-brand transition-colors font-medium"
-  >
-    Powered by <span className="text-brand">Invadya Technologies</span>
-  </a>
-        </div>
+        <div className="border-t border-white/10 pt-8">
+  <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+    <p className="text-slate-500 text-sm">
+      © {new Date().getFullYear()} All rights reserved by HIRA MAA Group.
+    </p>
+
+    <div className="flex items-center gap-4 text-sm text-slate-500">
+      <Link
+        href="/privacy-policy"
+        className="hover:text-white transition-colors"
+      >
+        Privacy Policy
+      </Link>
+
+      <Link
+        href="/terms-of-service"
+        className="hover:text-white transition-colors"
+      >
+        Terms of Service
+      </Link>
+    </div>
+  </div>
+
+  {/* Powered By */}
+  <div className="mt-6 flex justify-center">
+    <a
+      href="https://www.invadyatechnologies.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-sm text-slate-500 hover:text-brand transition-colors"
+    >
+      Powered by <span className="font-semibold text-brand">Invadya Technologies</span>
+    </a>
+  </div>
+</div>
+        
       </div>
     </footer>
   );

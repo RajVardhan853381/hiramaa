@@ -115,6 +115,14 @@ export default function Footer() {
             <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
+            <a
+    href="https://www.invadyatechnologies.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-brand transition-colors font-medium"
+  >
+    Powered by <span className="text-brand">Invadya Technologies</span>
+  </a>
         </div>
       </div>
     </footer>

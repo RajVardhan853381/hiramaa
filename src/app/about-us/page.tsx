@@ -216,8 +216,8 @@ export default function AboutUsPage() {
 
                     {/* Card */}
                     <div className={`ml-12 md:ml-0 md:w-[45%] ${i % 2 === 0 ? "md:mr-auto md:pr-12" : "md:ml-auto md:pl-12"}`}>
-                      <div className="bg-white rounded-2xl p-6 border border-emerald-100 shadow-sm hover:shadow-md transition-shadow">
-                        <span className="text-brand font-extrabold text-sm">{m.year}</span>
+                      <div className="bg-white rounded-2xl p-6 card-craft border border-emerald-100/80">
+                        <span className="text-brand font-extrabold text-sm tabular-nums">{m.year}</span>
                         <p className="text-slate-700 mt-1 text-sm leading-relaxed">{m.event}</p>
                       </div>
                     </div>
@@ -249,23 +249,23 @@ export default function AboutUsPage() {
               {COMPANIES.map((c, i) => (
                 <motion.div
                   key={i}
-                  className="group rounded-3xl overflow-hidden border border-slate-100 bg-white shadow-sm hover:shadow-[0_16px_40px_rgba(5,150,105,0.12)] hover:-translate-y-2 transition-all duration-300"
-                  initial={{ opacity: 0, y: 24 }}
+                  className="group rounded-3xl overflow-hidden card-craft bg-white"
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.07 }}
+                  transition={{ duration: 0.45, delay: i * 0.06, ease: [0.23, 1, 0.32, 1] }}
                 >
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
                       src={c.image}
                       alt={c.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover group-hover:scale-[1.04] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
                     <span
-                      className="absolute top-4 left-4 text-white text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full"
+                      className="absolute top-4 left-4 text-white text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow-2xs"
                       style={{ backgroundColor: c.accent }}
                     >
                       {c.tag}

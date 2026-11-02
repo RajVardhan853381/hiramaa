@@ -6,14 +6,31 @@
   --color-brand-dark: #047857;
   --color-brand-darker: #064e3b;
   --color-accent: #fbbf24;
-  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Force Light Theme Always */
+/* ─── Emil Kowalski & Apple Design Craft Tokens ─── */
 :root {
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #090d16;
+  
+  /* Emil Kowalski custom easing curves */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Precise UI timing */
+  --duration-press: 140ms;
+  --duration-ui: 200ms;
+  --duration-enter: 280ms;
+
   color-scheme: light;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -21,31 +38,104 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-/* Glassmorphism for Navbar */
+/* Tabular numbers for non-jittering statistics and counters */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Apple-style display typography tracking */
+.tracking-tight-display {
+  letter-spacing: -0.035em;
+}
+
+.tracking-eyebrow {
+  letter-spacing: 0.22em;
+}
+
+/* Subtle physical press feedback for all clickable buttons */
+.btn-press {
+  transition: transform var(--duration-press) var(--ease-out), filter var(--duration-press) var(--ease-out), background-color var(--duration-press) var(--ease-out);
+}
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Tactile press feedback for cards */
+.card-press {
+  transition: transform var(--duration-ui) var(--ease-out), box-shadow var(--duration-ui) var(--ease-out), border-color var(--duration-ui) var(--ease-out);
+}
+.card-press:active {
+  transform: scale(0.99);
+}
+
+/* Apple Materials & Depth: Translucent glass chrome */
 .glass {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(5, 150, 105, 0.12);
-  box-shadow: 0 4px 24px rgba(5, 150, 105, 0.06);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
 }
 
-/* Section helpers */
-.section-light {
-  background: #f0fdf4;
+.glass-dark {
+  background: rgba(10, 61, 46, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
 }
 
-.section-green {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 8px 24px -4px rgba(5, 150, 105, 0.05);
 }
 
-/* Card depth */
-.card-hover {
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+/* Multi-layered card elevation — gated behind hover:hover */
+.card-craft {
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+  transition: transform var(--duration-ui) var(--ease-out), box-shadow var(--duration-ui) var(--ease-out), border-color var(--duration-ui) var(--ease-out);
 }
-.card-hover:hover {
-  box-shadow: 0 20px 48px rgba(5, 150, 105, 0.15);
-  transform: translateY(-4px);
+
+@media (hover: hover) and (pointer: fine) {
+  .card-craft:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.06), 0 16px 36px -4px rgba(5, 150, 105, 0.1);
+    border-color: rgba(5, 150, 105, 0.25);
+  }
 }
+
+.card-craft:active {
+  transform: scale(0.99);
+}
+
+/* Subtle input focus rings */
+.input-craft {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background-color: #ffffff;
+  transition: border-color var(--duration-ui) var(--ease-out), box-shadow var(--duration-ui) var(--ease-out), background-color var(--duration-ui) var(--ease-out);
+}
+
+.input-craft:focus {
+  outline: none;
+  border-color: #059669;
+  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.12);
+}
+
+/* Accessibility: respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

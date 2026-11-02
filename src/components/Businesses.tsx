@@ -92,108 +92,107 @@ const BUSINESSES = [
   },
 ];
 
-function BusinessRow({ biz }: { biz: typeof BUSINESSES[0] }) {
+function BusinessRow({ biz, index }: { biz: typeof BUSINESSES[0]; index: number }) {
+  const isEven = index % 2 === 0;
+
   return (
     <div
-      className="relative w-full overflow-hidden"
-      style={{ backgroundColor: biz.bg }}
+      className="relative w-full py-16 md:py-24 overflow-hidden border-b border-slate-100 last:border-b-0"
     >
-      {/* Section number watermark */}
       <div
-        className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden"
-        style={{ opacity: 0.04 }}
-      >
-        <span
-          className="font-black text-slate-900"
-          style={{ fontSize: "clamp(10rem, 25vw, 22rem)", lineHeight: 1 }}
-        >
-          {biz.number}
-        </span>
-      </div>
-
-      <div
-        className={`relative z-10 container mx-auto px-6 md:px-12 py-20 md:py-28 grid md:grid-cols-2 gap-12 md:gap-20 items-center ${
-          biz.imageRight ? "" : "md:[&>*:first-child]:order-2"
+        className={`container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-10 md:gap-16 items-center ${
+          isEven ? "" : "md:[&>*:first-child]:order-2"
         }`}
       >
         {/* Image side */}
         <motion.div
-          className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] md:aspect-[3/2]"
-          initial={{ opacity: 0, y: 32 }}
+          className="relative rounded-2xl md:rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[3/2] border border-black/[0.06] shadow-sm group"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
         >
           <Image
             src={biz.image}
             alt={biz.name}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
-          {/* Color tint overlay on hover */}
+          {/* Subtle vignette on image */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+
+          {/* Number & Icon Badge */}
           <div
-            className="absolute inset-0 opacity-0 hover:opacity-20 transition-opacity duration-500"
-            style={{ backgroundColor: biz.accent }}
-          />
-          {/* Number tag */}
-          <div
-            className="absolute top-5 left-5 w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg"
+            className="absolute top-4 left-4 h-10 px-3 rounded-xl flex items-center gap-2 text-white font-bold text-xs shadow-sm backdrop-blur-md"
             style={{ backgroundColor: biz.accent }}
           >
-            <biz.icon size={20} />
+            <biz.icon size={16} />
+            <span className="tabular-nums font-mono">{biz.number}</span>
           </div>
         </motion.div>
 
         {/* Content side */}
         <motion.div
-          initial={{ opacity: 0, x: biz.imageRight ? -28 : 28 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.45, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
         >
           {/* Eyebrow */}
-          <div className="flex items-center gap-3 mb-5">
-            <span className="text-xs font-bold tracking-[0.3em] uppercase" style={{ color: biz.accent }}>
-              {biz.number}
+          <div className="flex items-center gap-2.5 mb-3.5">
+            <span 
+              className="text-xs font-bold tracking-[0.25em] uppercase tabular-nums" 
+              style={{ color: biz.accent }}
+            >
+              Division {biz.number}
             </span>
-            <div className="h-[1px] w-10 bg-current opacity-30" style={{ color: biz.accent }} />
-            <span className="text-xs font-semibold tracking-widest uppercase text-slate-400">Division</span>
+            <div className="h-[1px] w-8 bg-current opacity-25" style={{ color: biz.accent }} />
+            <span className="text-xs font-semibold tracking-wider uppercase text-slate-400">Enterprise</span>
           </div>
 
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-[-0.03em] leading-tight mb-2">
             {biz.name}
-          </h2>
-          <p className="text-base font-semibold mb-5" style={{ color: biz.accent }}>
+          </h3>
+          <p className="text-sm sm:text-base font-semibold mb-4" style={{ color: biz.accent }}>
             {biz.tagline}
           </p>
-          <div className="w-12 h-1 rounded-full mb-6" style={{ backgroundColor: biz.accent }} />
 
-          <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-8">
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-[55ch] mb-6">
             {biz.desc}
           </p>
 
           {/* Highlights */}
-          <div className="grid grid-cols-2 gap-3 mb-10">
+          <div className="grid grid-cols-2 gap-2.5 mb-8">
             {biz.highlights.map((h) => (
-              <div key={h} className="flex items-center gap-2.5">
-                <CheckCircle2 size={16} style={{ color: biz.accent }} className="shrink-0" />
-                <span className="text-sm font-medium text-slate-700">{h}</span>
+              <div key={h} className="flex items-center gap-2">
+                <CheckCircle2 size={15} style={{ color: biz.accent }} className="shrink-0" />
+                <span className="text-xs sm:text-sm font-medium text-slate-700">{h}</span>
               </div>
             ))}
           </div>
 
-          {/* CTA */}
+          {/* CTA with tactile feedback and division accent hover */}
           <Link
             href={biz.link}
-            className="inline-flex items-center gap-3 font-bold text-sm tracking-wide group"
+            className="inline-flex items-center gap-2.5 font-semibold text-xs sm:text-sm tracking-wide group active:scale-[0.97] transition-transform duration-160 ease-[cubic-bezier(0.23,1,0.32,1)]"
             style={{ color: biz.accent }}
           >
-            <span className="w-10 h-10 rounded-full border-2 flex items-center justify-center group-hover:scale-110 transition-transform"
-              style={{ borderColor: biz.accent }}>
-              <ArrowRight size={16} />
+            <span 
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border flex items-center justify-center transition-[background-color,color,transform] duration-160 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-white"
+              style={{ borderColor: biz.accent }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = biz.accent;
+                e.currentTarget.style.color = '#ffffff';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.color = biz.accent;
+              }}
+            >
+              <ArrowRight size={14} className="transition-transform duration-160 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0.5" />
             </span>
-            Learn More About This Division
+            <span>Explore Division</span>
           </Link>
         </motion.div>
       </div>
@@ -203,61 +202,54 @@ function BusinessRow({ biz }: { biz: typeof BUSINESSES[0] }) {
 
 export default function Businesses() {
   return (
-    <section id="businesses" className="bg-white">
+    <section id="businesses" className="bg-slate-50/40">
       {/* Section Header */}
-      <div className="container mx-auto px-6 md:px-12 pt-24 pb-16 text-center">
+      <div className="container mx-auto px-6 md:px-12 pt-20 md:pt-28 pb-12 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="inline-flex items-center gap-2 text-brand text-xs font-bold tracking-[0.3em] uppercase mb-4">
-            <span className="w-8 h-[2px] bg-brand inline-block" />
-            Our Companies
-            <span className="w-8 h-[2px] bg-brand inline-block" />
-          </span>
-          <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
-            Our Diversified <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-emerald-400">
-              Ecosystem
-            </span>
-          </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Six focused companies. One unified mission — to build a sustainable, thriving rural India through agriculture, energy, and innovation.
-          </p>
-        </motion.div>
-
-        {/* Division quick-nav pills */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-3 mt-10"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+        >
+          <span className="inline-flex items-center gap-2 text-brand text-xs font-bold tracking-[0.25em] uppercase mb-3">
+            <span className="w-6 h-[2px] bg-brand inline-block" />
+            Our Companies
+            <span className="w-6 h-[2px] bg-brand inline-block" />
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-[-0.035em] mb-4">
+            Our Diversified <span className="text-brand">Ecosystem</span>
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 max-w-[55ch] mx-auto leading-relaxed">
+            Six focused companies. One unified mission — to build a sustainable, thriving rural India through agriculture, renewable energy, and ethical enterprise.
+          </p>
+        </motion.div>
+
+        {/* Division quick-nav pills with instant press feedback */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mt-8"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
         >
           {BUSINESSES.map((b) => (
             <a
               key={b.id}
               href={`#biz-${b.id}`}
-              className="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all hover:scale-105"
-              style={{ borderColor: b.accent, color: b.accent, backgroundColor: b.bg }}
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-200 bg-white hover:border-slate-300 text-xs font-medium text-slate-700 shadow-2xs transition-[border-color,transform,box-shadow] duration-160 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.96]"
             >
-              <b.icon size={14} />
-              {b.name}
+              <b.icon size={13} style={{ color: b.accent }} />
+              <span>{b.name}</span>
             </a>
           ))}
         </motion.div>
       </div>
 
-      {/* Divider */}
-      <div className="w-full h-[1px] bg-slate-100" />
-
       {/* Alternating rows */}
-      <div className="divide-y divide-slate-100">
-        {BUSINESSES.map((biz) => (
+      <div className="border-t border-slate-100">
+        {BUSINESSES.map((biz, idx) => (
           <div key={biz.id} id={`biz-${biz.id}`}>
-            <BusinessRow biz={biz} />
+            <BusinessRow biz={biz} index={idx} />
           </div>
         ))}
       </div>

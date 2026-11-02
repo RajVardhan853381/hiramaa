@@ -14,37 +14,32 @@ const STATS = [
 
 export default function Hero() {
   return (
-    <div
-      className="relative w-full min-h-screen flex overflow-hidden bg-white"
-      style={{ paddingTop: 0 }}
-    >
+    <div className="relative w-full min-h-screen flex flex-col md:flex-row overflow-hidden bg-[#0a3d2e]">
       {/* ── LEFT PANEL: Deep Forest Green ── */}
-      <div
-        className="relative z-10 flex flex-col justify-between w-full md:w-[45%] bg-[#0a3d2e] px-8 md:px-14 pt-32 md:pt-36 pb-60 md:pb-10 shrink-0"
-      >
+      <div className="relative z-10 flex flex-col justify-between w-full md:w-[48%] lg:w-[44%] bg-[#0a3d2e] px-6 sm:px-10 md:px-14 pt-28 sm:pt-32 md:pt-36 pb-12 md:pb-12 shrink-0">
         {/* Vertical SINCE label */}
         <span
-          className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-[60%] rotate-90 text-[10px] tracking-[0.35em] uppercase text-white/30 font-medium whitespace-nowrap select-none"
+          className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-[60%] rotate-90 text-[10px] tracking-[0.35em] uppercase text-white/30 font-semibold whitespace-nowrap select-none"
         >
           Since 2018
         </span>
 
-        {/* Top label */}
+        {/* Top content block */}
         <div>
-          <div className="flex items-center gap-3 mb-10">
+          <div className="flex items-center gap-3 mb-6 md:mb-8">
             <div className="w-8 h-[2px] bg-emerald-400" />
-            <span className="text-emerald-400 text-xs tracking-[0.3em] uppercase font-semibold">
+            <span className="text-emerald-400 text-xs tracking-[0.25em] uppercase font-semibold">
               Sustainable Future
             </span>
           </div>
 
-          {/* Main headline — big, stacked, editorial */}
+          {/* Main headline — editorial typography with tight letter spacing */}
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="text-white font-extrabold leading-[1.0] tracking-tight mb-8"
-            style={{ fontSize: "clamp(2.8rem, 5vw, 5.5rem)" }}
+            transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+            className="text-white font-extrabold leading-[1.02] tracking-[-0.035em] mb-6"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 5.2rem)" }}
           >
             Empowering
             <br />
@@ -53,62 +48,60 @@ export default function Hero() {
             India.
           </motion.h1>
 
-          {/* Rule */}
+          {/* Rule line */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            className="w-full h-[1px] bg-white/10 mb-8 origin-left"
+            transition={{ duration: 0.35, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
+            className="w-full h-[1px] bg-white/10 mb-6 origin-left"
           />
 
-          {/* Description */}
+          {/* Description — capped line length for readability */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-white/60 text-base leading-relaxed max-w-xs mb-10"
+            transition={{ duration: 0.4, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="text-white/70 text-base md:text-lg leading-relaxed max-w-[42ch] mb-8"
           >
             A diversified group working across agriculture, dairy, solar energy, and environmental products — rooted in Chhattisgarh since 2018.
           </motion.p>
 
-          {/* CTA — minimal text link style */}
+          {/* Call to action with physical press feedback */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.65 }}
-            className="flex items-center gap-6"
+            transition={{ duration: 0.4, delay: 0.28, ease: [0.23, 1, 0.32, 1] }}
+            className="flex flex-wrap items-center gap-4 sm:gap-6"
           >
             <Link
               href="/products"
-              className="group flex items-center gap-3 text-white font-semibold text-sm tracking-wide"
+              className="group inline-flex items-center gap-3 px-5 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold text-sm tracking-wide shadow-sm hover:shadow-md transition-[transform,background-color,box-shadow] duration-160 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
             >
-              <span className="w-10 h-10 rounded-full border border-emerald-400 flex items-center justify-center group-hover:bg-emerald-400 transition-colors duration-300">
-                <ArrowRight size={16} className="text-emerald-400 group-hover:text-white transition-colors duration-300" />
-              </span>
-              Explore Our Products
+              <span>Explore Products</span>
+              <ArrowRight size={16} className="transition-transform duration-160 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0.5" />
             </Link>
             <Link
               href="/about-us"
-              className="text-white/40 hover:text-white text-sm font-medium tracking-wide transition-colors"
+              className="px-4 py-3 rounded-full text-white/70 hover:text-white text-sm font-medium tracking-wide transition-[color,transform] duration-160 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97]"
             >
-              About Us
+              About Our Group
             </Link>
           </motion.div>
         </div>
 
-        {/* Bottom stats row — inline editorial style */}
+        {/* Bottom stats row — tabular numbers to avoid layout jitter */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-14 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/10 pt-8"
+          transition={{ duration: 0.4, delay: 0.35, ease: [0.23, 1, 0.32, 1] }}
+          className="mt-10 md:mt-14 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-6"
         >
           {STATS.map((s, i) => (
-            <div key={i}>
-              <div className="text-2xl md:text-3xl font-extrabold text-white leading-none mb-1">
+            <div key={i} className="group">
+              <div className="text-2xl md:text-3xl font-extrabold text-white leading-none mb-1 tabular-nums tracking-tight">
                 {s.value}
               </div>
-              <div className="text-[11px] text-white/40 uppercase tracking-[0.2em] font-medium">
+              <div className="text-xs text-white/50 uppercase tracking-[0.18em] font-medium">
                 {s.label}
               </div>
             </div>
@@ -116,54 +109,40 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* ── RIGHT PANEL: Full-bleed landscape image ── */}
+      {/* ── RIGHT PANEL: Landscape photography with balanced vignette ── */}
       <motion.div
-        className="relative hidden md:block flex-1 overflow-hidden"
-        initial={{ opacity: 0, x: 60 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="relative flex-1 min-h-[320px] md:min-h-full overflow-hidden"
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
       >
         <Image
           src="/hero-landscape.png"
-          alt="Lush green farmland at golden hour"
+          alt="Lush green farmland at golden hour in Chhattisgarh"
           fill
           className="object-cover object-center"
-          sizes="(max-width: 768px) 0px, 55vw"
-          loading="eager"
-          fetchPriority="high"
+          sizes="(max-width: 768px) 100vw, 56vw"
+          priority
         />
-        {/* Subtle left-edge vignette so it doesn't clash with green panel */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a3d2e]/40 via-transparent to-transparent" />
+        {/* Multi-stop eased gradient vignette for smooth transition */}
+        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#0a3d2e] via-[#0a3d2e]/30 to-transparent" />
 
         {/* Floating year watermark */}
         <div
-          className="absolute bottom-8 right-8 text-white/10 font-extrabold select-none pointer-events-none"
-          style={{ fontSize: "clamp(4rem, 10vw, 9rem)", lineHeight: 1 }}
+          className="absolute bottom-6 right-6 md:bottom-10 md:right-10 text-white/[0.08] font-black select-none pointer-events-none tabular-nums"
+          style={{ fontSize: "clamp(4.5rem, 11vw, 9.5rem)", lineHeight: 0.85 }}
         >
           2018
         </div>
 
-        {/* Small caption tag on image — bottom left to avoid navbar overlap */}
-        <div className="absolute bottom-8 left-8 bg-black/30 backdrop-blur-md border border-white/10 rounded-full px-4 py-1.5 flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-white/80 text-xs font-medium tracking-wider uppercase">
+        {/* Small badge */}
+        <div className="absolute bottom-6 left-6 bg-black/40 backdrop-blur-md border border-white/15 rounded-full px-4 py-1.5 flex items-center gap-2.5 shadow-sm">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-white/90 text-xs font-semibold tracking-wider uppercase">
             Chhattisgarh, India
           </span>
         </div>
       </motion.div>
-
-      {/* Mobile: image strip at bottom */}
-      <div className="md:hidden absolute bottom-0 left-0 right-0 h-48 overflow-hidden">
-        <Image
-          src="/hero-landscape.png"
-          alt="Lush green farmland"
-          fill
-          className="object-cover object-top"
-          sizes="(max-width: 768px) 100vw, 0px"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a3d2e] via-[#0a3d2e]/60 to-transparent" />
-      </div>
     </div>
   );
 }

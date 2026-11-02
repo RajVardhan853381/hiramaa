@@ -1,6 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import WhatsAppButton from "@/components/WhatsAppButton";
+
+export const viewport: Viewport = {
+  themeColor: "#0a3d2e",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hiramaa.com"),
